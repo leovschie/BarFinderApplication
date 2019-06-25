@@ -1,0 +1,27 @@
+{
+  "name": "barfinderapplicationproject",
+  "version": "1.0.0",
+  "description": "Application that helps its users find a bar at the midpoint of their relative locations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "app": "concurrently -kill-others-on-fail \"npm run server\" \"npm run client\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leovschie/BarFinderApplication.git"
+  },
+  "author": "Leo van Schie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leovschie/BarFinderApplication/issues"
+  },
+  "homepage": "https://github.com/leovschie/BarFinderApplication#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.17.1"
+  }
+}
