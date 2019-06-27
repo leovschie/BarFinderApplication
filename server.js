@@ -1,6 +1,12 @@
 const express = require("express");
 const app = express();
 const axios = require("axios");
+const turf = require("@turf/turf");
+const GeoJSON = require("geojson");
+const yelp = require("yelp-fusion");
+const client = yelp.client(
+  "h9PwSdv_BZvvWSTFhTpDWMQO1vl96LxSgmnkwLmmdLQ4nwi_-wyoJky5u4QUUjld3v2L95iCCys8PYRpaUtKoEJwWq94KuMZQS1fs5BeK8lJYVqQuLxz_vhANdH4XHYx"
+);
 
 const port = process.env.PORT || 5000;
 
@@ -12,7 +18,7 @@ app.post("/api/formdata", (req, res) => {
   axios
     .get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${
-        req.body.addressOne
+        formData.addressOne
       }.json?bbox=4.72904,52.318396,5.068431,52.430717&types=address&access_token=pk.eyJ1IjoibGVvdnNjaGllIiwiYSI6ImNqd2hvZzVndjI1NXczeW1ncWZia2xmYnUifQ.N3ePKZlufagjG76E-tPQZQ`
     )
     .then(response => {
@@ -23,11 +29,10 @@ app.post("/api/formdata", (req, res) => {
       obj1.lng = coordinatesAddress1[0];
       features.push(obj1);
 
-      // secondAddressFinder.findAddress2(req, features, res);
       axios
         .get(
           `https://api.mapbox.com/geocoding/v5/mapbox.places/${
-            req.body.addressTwo
+            formData.addressTwo
           }.json?bbox=4.72904,52.318396,5.068431,52.430717&types=address&access_token=pk.eyJ1IjoibGVvdnNjaGllIiwiYSI6ImNqd2hvZzVndjI1NXczeW1ncWZia2xmYnUifQ.N3ePKZlufagjG76E-tPQZQ`
         )
         .then(response => {
@@ -38,47 +43,51 @@ app.post("/api/formdata", (req, res) => {
           obj2.lng = coordinatesAddress2[0];
           features.push(obj2);
           console.log(features);
+          var featureCollection = GeoJSON.parse(features, {
+            Point: ["lat", "lng"]
+          });
+          var centerCoords = turf.center(featureCollection);
+          console.log(centerCoords);
+          //   return centerCoords;
+          console.log(parseInt(formData.priceRange, 10));
 
-          // var centerCoords = findCenterCoordinates(response, features);
-          // barFinder.yelpBarFinder(centerCoords, res);
+          client
+            .search({
+              latitude: centerCoords.geometry.coordinates[1],
+              longitude: centerCoords.geometry.coordinates[0],
+              categories: formData.venueType,
+              //   price: parseInt(formData.priceRange, 10),
+              sort_by: "rating",
+              radius: 500,
+              open_now: true,
+              limit: 8
+            })
+            .then(response => {
+              let randomNumba = Math.floor(Math.random() * 8);
+              const bar = {
+                barName: response.jsonBody.businesses[randomNumba].name,
+                barImg: response.jsonBody.businesses[randomNumba].image_url,
+                barUrl: response.jsonBody.businesses[randomNumba].url,
+                barPrice: response.jsonBody.businesses[randomNumba].price,
+                barAddress:
+                  response.jsonBody.businesses[randomNumba].location
+                    .display_address
+              };
+              console.log(bar);
+              res.send(bar);
+            })
+            .catch(error =>
+              console.error(
+                `Problem either getting coordinates address2 or turf: ${
+                  error.stack
+                }`
+              )
+            );
         })
         .catch(error =>
-          console.error(
-            `Problem either getting coordinates address2 or turf: ${
-              error.stack
-            }`
-          )
+          console.error(`Could not get location from MapBox: ${error.stack}`)
         );
-    })
-
-    .catch(error =>
-      console.error(`Could not get location from MapBox: ${error.stack}`)
-    );
-
-  // axios
-  //   .get("/api/formdata")
-  //   .then(results => console.log(results))
-  //   .catch(error =>
-  //     console.error(
-  //       `Something went wrong with getting client data in server:${error.stack}`
-  //     )
-  //   );
+    });
 });
-
-// app.get("/addressOne", (req, res) => {
-//   axios
-//     .get(
-//       `https://api.mapbox.com/geocoding/v5/mapbox.places/spuistraat.json?bbox=4.72904,52.318396,5.068431,52.430717&types=address&access_token=pk.eyJ1IjoibGVvdnNjaGllIiwiYSI6ImNqd2hvZzVndjI1NXczeW1ncWZia2xmYnUifQ.N3ePKZlufagjG76E-tPQZQ`
-//     )
-//     .then(results => {
-//       console.log(results.data);
-//       res.send(results.data);
-//     })
-//     .catch(error =>
-//       console.error(
-//         `Something went wrong with the first get request: ${error.stack}`
-//       )
-//     );
-// });
 
 app.listen(port, () => console.log(`Got ears on port: ${port}`));

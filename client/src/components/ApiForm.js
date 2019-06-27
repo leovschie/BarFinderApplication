@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class ApiForm extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class ApiForm extends Component {
       addressOne: "",
       addressTwo: "",
       venueType: "bar",
-      priceRange: "$,$$"
+      priceRange: 2,
+      redirect: false
     };
   }
 
@@ -32,7 +34,10 @@ class ApiForm extends Component {
 
     axios
       .post("/api/formdata", formData)
-      .then(result => console.log(`Sent info from client to server: ${result}`))
+      .then(resultsFromServer => {
+        this.props.showBar(resultsFromServer);
+        console.log("this is the barresult", this.props.results);
+      })
       .catch(error =>
         console.error(
           `Something went wrong with sending from client to server: ${
@@ -40,15 +45,21 @@ class ApiForm extends Component {
           }`
         )
       );
+    {
+      this.setRedirect();
+    }
   };
 
-  // { addressOne, addressTwo, venueType, priceRange } = this.state;
-  // alert(`Your registration detail: \n
-  //          Address One: ${addressOne} \n
-  //          Address Two: ${addressTwo} \n
-  //          Venue Type: ${venueType} \n
-  //          Price Range: ${priceRange}`);
-  // };
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/results" />;
+    }
+  };
 
   _next = () => {
     let currentStep = this.state.currentStep;
@@ -75,7 +86,7 @@ class ApiForm extends Component {
           type="button"
           onClick={this._prev}
         >
-          Previous
+          &lt;&lt;
         </button>
       );
     }
@@ -91,7 +102,7 @@ class ApiForm extends Component {
           type="button"
           onClick={this._next}
         >
-          Next
+          &gt;&gt;
         </button>
       );
     }
@@ -99,36 +110,36 @@ class ApiForm extends Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <h1>borrle</h1>
-        <p>Step {this.state.currentStep}</p>
-
-        <form onSubmit={this.handleSubmit}>
-          {/* 
+    if (this.state.redirect) return <Redirect to="/results" />;
+    else
+      return (
+        <React.Fragment>
+          <h1>borrle</h1>
+          <form onSubmit={this.handleSubmit}>
+            {/* 
           render the form steps and pass required props in
         */}
-          <Step1
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            addressOne={this.state.addressOne}
-            addressTwo={this.state.addressTwo}
-          />
-          <Step2
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            venueType={this.state.venueType}
-          />
-          <Step3
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            priceRange={this.state.priceRange}
-          />
-          {this.previousButton()}
-          {this.nextButton()}
-        </form>
-      </React.Fragment>
-    );
+            <Step1
+              currentStep={this.state.currentStep}
+              handleChange={this.handleChange}
+              addressOne={this.state.addressOne}
+              addressTwo={this.state.addressTwo}
+            />
+            <Step2
+              currentStep={this.state.currentStep}
+              handleChange={this.handleChange}
+              venueType={this.state.venueType}
+            />
+            <Step3
+              currentStep={this.state.currentStep}
+              handleChange={this.handleChange}
+              priceRange={this.state.priceRange}
+            />
+            {this.previousButton()}
+            {this.nextButton()}
+          </form>
+        </React.Fragment>
+      );
   }
 }
 
@@ -138,7 +149,7 @@ function Step1(props) {
   }
   return (
     <div className="form-group">
-      <label htmlFor="addressOne">Address One</label>
+      <label htmlFor="addressOne" />
       <input
         className="form-control"
         id="addressOne"
@@ -148,7 +159,7 @@ function Step1(props) {
         value={props.addressOne}
         onChange={props.handleChange}
       />
-      <label htmlFor="addressTwo">Address Two</label>
+      <label htmlFor="addressTwo" />
       <input
         className="form-control"
         id="addressTwo"
@@ -169,15 +180,15 @@ function Step2(props) {
   return (
     <div className="form-group">
       <label htmlFor="venueType"> </label>
-      Just drinks or drinks and a bite?
+      <p>in the mood for</p>
       <select
         className="form-control"
         value={props.venueType}
         onChange={props.handleChange}
         name="venueType"
       >
-        <option value="bar">Drinks</option>
-        <option value="bar,restaurant">Food and Drinks</option>
+        <option value="bars">Drinks</option>
+        <option value="restaurant">Food and Drinks</option>
       </select>
     </div>
   );
@@ -190,19 +201,21 @@ function Step3(props) {
   return (
     <React.Fragment>
       <div className="form-group">
-        <label htmlFor="priceRange">Price Range</label>
-        <select
-          className="form-control"
-          id="priceRange"
-          name="priceRange"
-          placeholder="Enter Price Range"
-          value={props.priceRange}
-          onChange={props.handleChange}
-        >
-          <option value="$,$$">Cheap</option>
-          <option value="$$,$$$">Medium</option>
-          <option value="$$$,$$$$">Fancy</option>
-        </select>
+        <div className="custom-select">
+          <label htmlFor="priceRange">Price Range</label>
+          <select
+            className="form-control"
+            id="priceRange"
+            name="priceRange"
+            placeholder="Enter Price Range"
+            value={props.priceRange}
+            onChange={props.handleChange}
+          >
+            <option value="1">Cheap</option>
+            <option value="2">Medium</option>
+            <option value="3">Fancy</option>
+          </select>
+        </div>
       </div>
       <button className="btn btn-success btn-block">meet up</button>
     </React.Fragment>
