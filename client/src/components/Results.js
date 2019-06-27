@@ -42,10 +42,10 @@ class Results extends Component {
       return (
         <div className="displayResults">
           <h1>See you at {barName}</h1>
-          <img className="barImg" src={barImg} />
+          <img className="barImg" src={barImg} alt="Bar" />
           <p>{barAddress}</p>
           <p>{barPrice}</p>
-          <a href={barUrl} target="_blank">
+          <a href={barUrl} target="_blank" rel="noopener noreferrer">
             Read more
           </a>
         </div>
