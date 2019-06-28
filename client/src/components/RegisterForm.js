@@ -1,11 +1,16 @@
+//this form has its own state because when you make a new user you need to save it somehwere. So we're saving it in the state.
 import React, { Component } from "react";
 import axios from "axios";
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: "",
+      password: ""
+    };
   }
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -16,11 +21,14 @@ class LoginForm extends Component {
       email: this.state.email,
       password: this.state.password
     };
+
+    //this sends user to server in the backend
     axios
-      .post("/login", user)
+      .post("/register", user)
       .then(results => {
         //addUser that is passed down from App.js (react) for updating the state of app.js. So it is a prop in form that we get from
         // somewhere that holds addUser. In this addUser we are putting (this.state)
+        this.props.addUser(this.state);
         this.setState({
           id: results.data.id,
           email: results.data.email,
@@ -28,19 +36,16 @@ class LoginForm extends Component {
           redirect: true
         });
       })
-      .catch(error =>
-        console.error(
-          `something went wrong with sending to backend ${error.stack}`
-        )
-      );
+      .catch();
   };
 
   render() {
     return (
       <div>
-        <h1>Log in</h1>
+        <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
+            {/* <label>Email:</label> */}
             <br />
             <input
               type="email"
@@ -70,4 +75,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default RegisterForm;

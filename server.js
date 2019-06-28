@@ -7,12 +7,23 @@ const yelp = require("yelp-fusion");
 const client = yelp.client(
   "h9PwSdv_BZvvWSTFhTpDWMQO1vl96LxSgmnkwLmmdLQ4nwi_-wyoJky5u4QUUjld3v2L95iCCys8PYRpaUtKoEJwWq94KuMZQS1fs5BeK8lJYVqQuLxz_vhANdH4XHYx"
 );
-const { postNewUser } = require("./controllers/routeController");
+const { postUserRegistration } = require("./controllers/registerController");
+const { postUserLogin } = require("./controllers/loginController");
+const cookieParser = require("cookie-parser");
 const { connector } = require("./database/configuration/dbConfig");
+const session = require("express-session");
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
-
+app.use(cookieParser());
+app.use(
+  session({
+    name: process.env.SESSION_COOKIE,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
 app.post("/api/formdata", (req, res) => {
   const formData = req.body;
   console.log(formData);
@@ -91,15 +102,14 @@ app.post("/api/formdata", (req, res) => {
     });
 });
 
-app.post("/api/newuser", postNewUser); //Method that listens for incoming data from the client (React)
+app.post("/register", postUserRegistration); //Method that listens for incoming data from the client (React)
+app.post("/login", postUserLogin);
 
 connector
-  .sync({ force: true })
+  .sync()
   .then(() => {
     app.listen(port, () => console.log(`Got ears on port: ${port}`));
   })
   .catch(error =>
     console.error(`Cannot sync connector with server ${error.stack}`)
   );
-
-// app.listen(port, () => console.log(`Got ears on port: ${port}`));

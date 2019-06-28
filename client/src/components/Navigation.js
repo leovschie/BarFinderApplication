@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { HashRouter, Switch, Route, Link } from "react-router-dom";
 import App from "../App";
 import Results from "./Results";
-import Login from "./Login";
+import LoginForm from "./LoginForm";
 
 class Navigation extends Component {
   render() {
@@ -33,7 +33,7 @@ class Navigation extends Component {
           <Switch>
             <Route exact path="/home" component={App} />
             <Route path="/results" component={Results} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" component={LoginForm} />
           </Switch>
         </div>
       </HashRouter>

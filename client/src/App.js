@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import ApiForm from "./components/ApiForm";
+import RegisterForm from "./components/RegisterForm";
 import "./App.css";
 import Results from "./components/Results";
 import axios from "axios";
 import Navigation from "./components/Navigation";
+import LoginForm from "./components/LoginForm";
+import SideBar from "./components/SideBar";
 
 class App extends Component {
   constructor(props) {
@@ -38,8 +41,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <SideBar />
         <ApiForm showBar={this.showBar} />
         <Results className="ResultsMainPage" results={this.state.result} />
+        <RegisterForm addUser={this.addUser} />
+        <LoginForm />
+
         {/* <Navigation /> */}
       </div>
     );
