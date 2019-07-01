@@ -1,11 +1,21 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: "",
+      password: ""
+    };
   }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -19,14 +29,13 @@ class LoginForm extends Component {
     axios
       .post("/login", user)
       .then(results => {
-        //addUser that is passed down from App.js (react) for updating the state of app.js. So it is a prop in form that we get from
-        // somewhere that holds addUser. In this addUser we are putting (this.state)
         this.setState({
           id: results.data.id,
           email: results.data.email,
           password: results.data.password,
-          redirect: true
+          redirect: false
         });
+        this.setRedirect();
       })
       .catch(error =>
         console.error(
@@ -36,37 +45,39 @@ class LoginForm extends Component {
   };
 
   render() {
-    return (
-      <div>
-        <h1>Log in</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
+    if (this.state.redirect) return <Redirect to="/" />;
+    else
+      return (
+        <div>
+          <h1>Log in</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <br />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div>
+              <br />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
             <br />
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div>
-            <br />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <br />
-          <input type="submit" value="Create" />
-        </form>
-      </div>
-    );
+            <input type="submit" value="Create" />
+          </form>
+        </div>
+      );
   }
 }
 

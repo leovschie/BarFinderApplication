@@ -55,11 +55,6 @@ class ApiForm extends Component {
       redirect: true
     });
   };
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/results" />;
-    }
-  };
 
   _next = () => {
     let currentStep = this.state.currentStep;
@@ -187,8 +182,8 @@ function Step2(props) {
         onChange={props.handleChange}
         name="venueType"
       >
-        <option value="bars">Drinks</option>
-        <option value="restaurant">Food and Drinks</option>
+        <option value="bars, pubs">Drinks</option>
+        <option value="cafetaria, diner, restaurant">Food and Drinks</option>
       </select>
     </div>
   );

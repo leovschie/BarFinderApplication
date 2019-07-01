@@ -10,7 +10,6 @@ module.exports = {
       }
     })
       .then(foundUser => {
-        //here's where the magic happens
         bcrypt
           .compare(req.body.password, foundUser.dataValues.password)
           .then(results => {
@@ -24,6 +23,7 @@ module.exports = {
                 error.stack
               );
               res.send("/login");
+
               //   res.redirect("/login");
             }
           })

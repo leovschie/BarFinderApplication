@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import ApiForm from "./components/ApiForm";
-import RegisterForm from "./components/RegisterForm";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import Results from "./components/Results";
-import axios from "axios";
-import Navigation from "./components/Navigation";
 import LoginForm from "./components/LoginForm";
 import SideBar from "./components/SideBar";
+import ApiForm from "./components/ApiForm";
+import RegisterForm from "./components/RegisterForm";
+import LogOutButton from "./components/LogOutButton";
+import Home from "./Home";
 
 class App extends Component {
   constructor(props) {
@@ -21,19 +22,6 @@ class App extends Component {
     this.setState({ result: barResults });
   };
 
-  componentDidMount() {
-    axios
-      .get("/api/users")
-      .then(resultsFromServer =>
-        this.setState({ users: resultsFromServer.data })
-      )
-      .catch(error =>
-        console.error(
-          `Something went wrong when component mounted: ${error.stack}`
-        )
-      );
-  }
-
   addUser = formState => {
     this.setState({ users: [...this.state.users, formState] });
   };
@@ -42,12 +30,16 @@ class App extends Component {
     return (
       <div className="App">
         <SideBar />
+        <LogOutButton />
+        <Switch>
+          <Route exact path="/Home" component={Home} />
+          <Route path="/Login" component={LoginForm} />
+          <Route path="/Register" component={RegisterForm} />
+        </Switch>
         <ApiForm showBar={this.showBar} />
         <Results className="ResultsMainPage" results={this.state.result} />
         <RegisterForm addUser={this.addUser} />
         <LoginForm />
-
-        {/* <Navigation /> */}
       </div>
     );
   }

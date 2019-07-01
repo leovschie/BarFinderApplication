@@ -1,24 +1,19 @@
 import React from "react";
 import { bubble as Menu } from "react-burger-menu";
+import { Link } from "react-router-dom";
 
 export default props => {
   return (
     <Menu>
-      <a className="menu-item" href="/">
+      <Link to="/Home" className="menu-item">
         Home
-      </a>
-
-      <a className="menu-item" href="/burgers">
-        Burgers
-      </a>
-
-      <a className="menu-item" href="/pizzas">
-        Pizzas
-      </a>
-
-      <a className="menu-item" href="/desserts">
-        Desserts
-      </a>
+      </Link>
+      <Link to="/Login" className="menu-item">
+        Log In
+      </Link>
+      <Link to="/Register" className="menu-item">
+        Sign Up
+      </Link>
     </Menu>
   );
 };

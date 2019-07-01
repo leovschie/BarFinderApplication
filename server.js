@@ -9,6 +9,7 @@ const client = yelp.client(
 );
 const { postUserRegistration } = require("./controllers/registerController");
 const { postUserLogin } = require("./controllers/loginController");
+const logOut = require("./controllers/logOutController");
 const cookieParser = require("cookie-parser");
 const { connector } = require("./database/configuration/dbConfig");
 const session = require("express-session");
@@ -80,7 +81,7 @@ app.post("/api/formdata", (req, res) => {
                 barName: response.jsonBody.businesses[randomNumba].name,
                 barImg: response.jsonBody.businesses[randomNumba].image_url,
                 barUrl: response.jsonBody.businesses[randomNumba].url,
-                barPrice: response.jsonBody.businesses[randomNumba].price,
+                // barPrice: response.jsonBody.businesses[randomNumba].price,
                 barAddress:
                   response.jsonBody.businesses[randomNumba].location
                     .display_address
@@ -104,6 +105,7 @@ app.post("/api/formdata", (req, res) => {
 
 app.post("/register", postUserRegistration); //Method that listens for incoming data from the client (React)
 app.post("/login", postUserLogin);
+app.get("/logout", logOut);
 
 connector
   .sync()
