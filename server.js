@@ -9,11 +9,14 @@ const client = yelp.client(
 );
 const { postUserRegistration } = require("./controllers/registerController");
 const { postUserLogin } = require("./controllers/loginController");
+const Result = require("./database/models/Result");
 const logOut = require("./controllers/logOutController");
+const { getResults } = require("./controllers/resultController");
 const cookieParser = require("cookie-parser");
 const { connector } = require("./database/configuration/dbConfig");
 const session = require("express-session");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
+// const checkCookies = require("./helperfunctions/checkCookies");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -25,8 +28,19 @@ app.use(
     saveUninitialized: false
   })
 );
+
+function checkCookies(req, res) {
+  if (!req.cookies.authCookie) {
+    res.send(false);
+  } else {
+    res.send(true);
+  }
+}
+
 app.post("/api/formdata", (req, res) => {
   const formData = req.body;
+  const session = req.session.user;
+  console.log("THIS IS THE SESSION !!!!!!!!!!!!!!!!!!", session);
   console.log(formData);
   axios
     .get(
@@ -62,31 +76,35 @@ app.post("/api/formdata", (req, res) => {
           var centerCoords = turf.center(featureCollection);
           console.log(centerCoords);
           //   return centerCoords;
-          console.log(parseInt(formData.priceRange, 10));
 
           client
             .search({
               latitude: centerCoords.geometry.coordinates[1],
               longitude: centerCoords.geometry.coordinates[0],
-              categories: formData.venueType,
-              //   price: parseInt(formData.priceRange, 10),
+              categories: String(formData.venueType),
+              // price: parseInt(formData.priceRange, 10),
               sort_by: "rating",
-              radius: 500,
+              radius: 450,
               open_now: true,
-              limit: 8
+              limit: 1
             })
             .then(response => {
-              let randomNumba = Math.floor(Math.random() * 8);
+              console.log("this is response:", response);
               const bar = {
-                barName: response.jsonBody.businesses[randomNumba].name,
-                barImg: response.jsonBody.businesses[randomNumba].image_url,
-                barUrl: response.jsonBody.businesses[randomNumba].url,
-                // barPrice: response.jsonBody.businesses[randomNumba].price,
-                barAddress:
-                  response.jsonBody.businesses[randomNumba].location
-                    .display_address
+                barName: response.jsonBody.businesses[0].name,
+                barImg: response.jsonBody.businesses[0].image_url,
+                barUrl: response.jsonBody.businesses[0].url,
+                barPrice: response.jsonBody.businesses[0].price,
+                barAddress: response.jsonBody.businesses[0].location.address1
               };
               console.log(bar);
+              if (session) {
+                Result.create({
+                  barname: bar.barName,
+                  address: bar.barAddress,
+                  userId: session.id
+                });
+              }
               res.send(bar);
             })
             .catch(error =>
@@ -105,7 +123,32 @@ app.post("/api/formdata", (req, res) => {
 
 app.post("/register", postUserRegistration); //Method that listens for incoming data from the client (React)
 app.post("/login", postUserLogin);
+app.post("/resulthistory", (req, res) => {
+  req.session.user;
+  const session = req.session.user;
+  if (session) {
+    Result.findAll({
+      where: {
+        userId: session.id
+      }
+    })
+      .then(results => {
+        const dbResults = results;
+        console.log("results from findAll", dbResults);
+
+        res.send(dbResults);
+      })
+      .catch(error => console.error(`Couldn't login: ${error.stack}`));
+  } else {
+    console.log(
+      `User is not logged in so nothing is displayed in resulthistory!`
+    );
+  }
+});
 app.get("/logout", logOut);
+app.get("/home", (req, res) => {
+  checkCookies(req, res);
+});
 
 connector
   .sync()

@@ -41,7 +41,7 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="centerText">
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
@@ -49,7 +49,7 @@ class RegisterForm extends Component {
             <br />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="email"
               name="email"
               value={this.state.email}
               onChange={this.handleChange}
@@ -60,7 +60,7 @@ class RegisterForm extends Component {
             <br />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="password"
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
@@ -68,7 +68,7 @@ class RegisterForm extends Component {
             />
           </div>
           <br />
-          <input type="submit" value="Create" />
+          <input type="submit" value="create" />
         </form>
       </div>
     );

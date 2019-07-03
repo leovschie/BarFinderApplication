@@ -36,6 +36,7 @@ class LoginForm extends Component {
           redirect: false
         });
         this.setRedirect();
+        window.location.reload();
       })
       .catch(error =>
         console.error(
@@ -48,17 +49,18 @@ class LoginForm extends Component {
     if (this.state.redirect) return <Redirect to="/" />;
     else
       return (
-        <div>
-          <h1>Log in</h1>
+        <div className="centerText">
+          <h1>log in</h1>
           <form onSubmit={this.handleSubmit}>
             <div>
               <br />
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="email"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                autocomplete="off"
                 required
               />
             </div>
@@ -66,7 +68,7 @@ class LoginForm extends Component {
               <br />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChange}
@@ -74,7 +76,7 @@ class LoginForm extends Component {
               />
             </div>
             <br />
-            <input type="submit" value="Create" />
+            <input type="submit" value="log In" />
           </form>
         </div>
       );

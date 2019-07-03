@@ -8,7 +8,7 @@ class Results extends Component {
       if (barResults.hasOwnProperty(key)) {
         switch (key) {
           case "barName":
-            barName = barResults[key];
+            barName = barResults[key].toLowerCase();
             break;
 
           case "barUrl":
@@ -40,13 +40,13 @@ class Results extends Component {
 
     if (barResults) {
       return (
-        <div className="displayResults">
-          <h1>See you at {barName}</h1>
+        <div className="centerText">
+          <h1>see you at {barName}</h1>
           <img className="barImg" src={barImg} alt="Bar" />
           <p>{barAddress}</p>
           <p>{barPrice}</p>
           <a href={barUrl} target="_blank" rel="noopener noreferrer">
-            Read more
+            read more
           </a>
         </div>
       );

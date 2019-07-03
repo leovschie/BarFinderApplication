@@ -1,19 +1,63 @@
-import React from "react";
+import React, { Component } from "react";
 import { bubble as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-export default props => {
-  return (
-    <Menu>
-      <Link to="/Home" className="menu-item">
-        Home
-      </Link>
-      <Link to="/Login" className="menu-item">
-        Log In
-      </Link>
-      <Link to="/Register" className="menu-item">
-        Sign Up
-      </Link>
-    </Menu>
-  );
-};
+class SideBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("/home")
+      .then(results => {
+        this.setState({ loggedIn: results.data });
+      })
+      .catch(error => {
+        console.error(
+          `something went wrong with conditional rendering ${error.stack}`
+        );
+      });
+  }
+
+  render() {
+    if (this.state.loggedIn === false) {
+      return (
+        <Menu>
+          <Link to="/" className="menu-item">
+            home
+          </Link>
+          <Link to="/Login" className="menu-item">
+            log in
+          </Link>
+          <Link to="/Register" className="menu-item">
+            sign up
+          </Link>
+        </Menu>
+      );
+    } else {
+      return (
+        <Menu>
+          <Link to="/" className="menu-item">
+            home
+          </Link>
+          <Link to="/resulthistory" className="menu-item">
+            your barhopping history
+          </Link>
+          <Link to="/Map" className="menu-item">
+            map
+          </Link>
+          <Link to="/Logout" className="menu-item">
+            log out
+          </Link>
+        </Menu>
+      );
+    }
+  }
+}
+
+export default SideBar;

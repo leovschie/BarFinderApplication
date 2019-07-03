@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import UserHistory from "./UserHistory";
 
 class LogOutButton extends Component {
   constructor(props) {
@@ -29,13 +30,14 @@ class LogOutButton extends Component {
   };
 
   render() {
-    if (this.state.redirect) return <Redirect to="/login" />;
+    if (this.state.redirect) return <Redirect to="/" />;
     else
       return (
-        <div>
-          <form className="logOutForm" onSubmit={this.logOut.bind(this)}>
+        <div className="centerText">
+          <form className="logOutButton" onSubmit={this.logOut.bind(this)}>
             <input type="submit" value="log out" />
           </form>
+          <UserHistory />
         </div>
       );
   }

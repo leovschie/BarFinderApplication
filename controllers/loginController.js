@@ -23,8 +23,6 @@ module.exports = {
                 error.stack
               );
               res.send("/login");
-
-              //   res.redirect("/login");
             }
           })
           .catch(error => console.error(`Couldn't login: ${error.stack}`));

@@ -4,29 +4,58 @@ body > #root > div {
   width: 100vw;
 }
 .App {
-  text-align: center;
   font-family: "Fira Sans", sans-serif;
-
+  font-weight: bold;
+  background: #101b33;
   width: auto;
-  justify-content: center;
-  align-items: center;
-  color: black;
+  color: white;
+  letter-spacing: 0.15em;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: #e86262;
+  cursor: pointer;
+}
+.centerText {
+  text-align: center;
+}
+
+select {
+  color: white;
+  font-family: "Fira Sans", sans-serif;
+  outline: none;
 }
 
 input {
   border: none;
   background: transparent;
   font-family: "Fira Sans", sans-serif;
-  font-size: 2vh;
+  font-weight: bold;
+  font-size: 4vh;
+  color: #e86262;
+  text-align: center;
+  padding-bottom: 1%;
+  outline: none;
 }
 button {
   border: none;
   background-color: transparent;
-  color: black;
+  color: #82caff;
   font-size: 2vh;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  color: #e86262;
 }
 ::placeholder {
-  color: black;
+  color: white;
 }
 
 select {
@@ -43,13 +72,95 @@ select {
 h1 {
   font-weight: bold;
   justify-self: center;
-  font-size: 4vh;
+  font-size: 8vh;
+  color: #82caff;
+  padding: 1%;
 }
-
 .barImg {
   width: 30%;
   height: auto;
 }
+
+.logoImg {
+  width: 20%;
+  height: auto;
+  filter: invert(100%);
+  padding-bottom: 4%;
+}
+
+.arrow {
+  filter: invert(100%);
+  width: 20%;
+  height: auto;
+  padding-top: 3%;
+}
+
+::selection {
+  color: #dcfaff;
+}
+
+/* styling for selectboxes!*/
+/* body {
+  background: transparent;
+}
+
+.selectdiv {
+  position: relative;
+
+
+  float: left;
+  min-width: 200px;
+  margin: 50px 33%;
+}
+
+
+select::-ms-expand {
+  display: none;
+}
+
+.selectdiv:after {
+  content: "<>";
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 11px;
+
+
+  top: 18px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  
+
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: black;
+  font-family: "Fira Sans", sans-serif;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  -ms-word-break: normal;
+  word-break: normal;
+} */
 
 html,
 body {
@@ -76,13 +187,13 @@ body {
   /* Our sidebar item styling */
   text-decoration: none;
   margin-bottom: 10px;
-  color: white;
+  color: #dcfaff;
   transition: color 0.2s;
 }
 
 /* Change color on hover */
 .bm-item:hover {
-  color: yellow;
+  color: #dcfaff;
 }
 
 /* The rest copied directly from react-burger-menu docs */
@@ -98,7 +209,7 @@ body {
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: white;
 }
 
 /* Position and sizing of clickable cross button */
@@ -109,24 +220,24 @@ body {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #dcfaff;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: pink;
+  background: #e86262;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: pink;
+  fill: #e86262;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
+  color: #2ca18c;
 }
 
 /* Styling of overlay */

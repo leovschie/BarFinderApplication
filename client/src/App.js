@@ -7,7 +7,8 @@ import SideBar from "./components/SideBar";
 import ApiForm from "./components/ApiForm";
 import RegisterForm from "./components/RegisterForm";
 import LogOutButton from "./components/LogOutButton";
-import Home from "./Home";
+import RenderMap from "./components/RenderMap";
+import UserHistory from "./components/UserHistory";
 
 class App extends Component {
   constructor(props) {
@@ -30,16 +31,30 @@ class App extends Component {
     return (
       <div className="App">
         <SideBar />
-        <LogOutButton />
         <Switch>
-          <Route exact path="/Home" component={Home} />
+          <Route
+            exact
+            path="/"
+            render={routeProps => <ApiForm showBar={this.showBar} />}
+          />
           <Route path="/Login" component={LoginForm} />
-          <Route path="/Register" component={RegisterForm} />
+          <Route
+            path="/Register"
+            render={routeProps => <RegisterForm addUser={this.addUser} />}
+          />
+          <Route path="/Logout" component={LogOutButton} />
+          <Route path="/Map" component={RenderMap} />
+          <Route
+            path="/Results"
+            render={routeProps => (
+              <Results
+                className="ResultsMainPage"
+                results={this.state.result}
+              />
+            )}
+          />
+          <Route path="/resulthistory" component={UserHistory} />
         </Switch>
-        <ApiForm showBar={this.showBar} />
-        <Results className="ResultsMainPage" results={this.state.result} />
-        <RegisterForm addUser={this.addUser} />
-        <LoginForm />
       </div>
     );
   }

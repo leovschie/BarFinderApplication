@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import logo from "../images/logo2.png";
+import next from "../images/right-arrow.png";
+import previous from "../images/left-arrow.png";
 
 class ApiForm extends Component {
   constructor(props) {
@@ -9,7 +12,7 @@ class ApiForm extends Component {
       currentStep: 1,
       addressOne: "",
       addressTwo: "",
-      venueType: "bar",
+      venueType: "bars",
       priceRange: 2,
       redirect: false
     };
@@ -45,9 +48,8 @@ class ApiForm extends Component {
           }`
         )
       );
-    {
-      this.setRedirect();
-    }
+
+    this.setRedirect();
   };
 
   setRedirect = () => {
@@ -81,7 +83,7 @@ class ApiForm extends Component {
           type="button"
           onClick={this._prev}
         >
-          &lt;&lt;
+          <img alt="arrow" className="arrow" src={previous} />
         </button>
       );
     }
@@ -97,7 +99,7 @@ class ApiForm extends Component {
           type="button"
           onClick={this._next}
         >
-          &gt;&gt;
+          <img alt="arrow" className="arrow" src={next} />
         </button>
       );
     }
@@ -108,8 +110,9 @@ class ApiForm extends Component {
     if (this.state.redirect) return <Redirect to="/results" />;
     else
       return (
-        <React.Fragment>
-          <h1>borrle</h1>
+        <div className="centerText">
+          <h1>borrle.</h1>
+          <img alt="borrle logo" className="logoImg" src={logo} />
           <form onSubmit={this.handleSubmit}>
             {/* 
           render the form steps and pass required props in
@@ -133,7 +136,7 @@ class ApiForm extends Component {
             {this.previousButton()}
             {this.nextButton()}
           </form>
-        </React.Fragment>
+        </div>
       );
   }
 }
@@ -150,7 +153,8 @@ function Step1(props) {
         id="addressOne"
         name="addressOne"
         type="text"
-        placeholder="Enter First Address"
+        placeholder="where u at?"
+        autoComplete="off"
         value={props.addressOne}
         onChange={props.handleChange}
       />
@@ -160,7 +164,8 @@ function Step1(props) {
         id="addressTwo"
         name="addressTwo"
         type="text"
-        placeholder="Enter Second Address"
+        automplete="off"
+        placeholder="and ur friend?"
         value={props.addressTwo}
         onChange={props.handleChange}
       />
@@ -173,17 +178,17 @@ function Step2(props) {
     return null;
   }
   return (
-    <div className="form-group">
+    <div className="selectdiv">
       <label htmlFor="venueType"> </label>
-      <p>in the mood for</p>
+      <p>belly mood?</p>
       <select
         className="form-control"
         value={props.venueType}
         onChange={props.handleChange}
         name="venueType"
       >
-        <option value="bars, pubs">Drinks</option>
-        <option value="cafetaria, diner, restaurant">Food and Drinks</option>
+        <option value="bars">drinks</option>
+        <option value="restaurants">food and drinks</option>
       </select>
     </div>
   );
@@ -197,18 +202,18 @@ function Step3(props) {
     <React.Fragment>
       <div className="form-group">
         <div className="custom-select">
-          <label htmlFor="priceRange">Price Range</label>
+          <label htmlFor="priceRange">price range</label>
           <select
             className="form-control"
             id="priceRange"
             name="priceRange"
-            placeholder="Enter Price Range"
+            placeholder="money mood?"
             value={props.priceRange}
             onChange={props.handleChange}
           >
-            <option value="1">Cheap</option>
-            <option value="2">Medium</option>
-            <option value="3">Fancy</option>
+            <option value="1">cheap</option>
+            <option value="2">medium</option>
+            <option value="3">fancy</option>
           </select>
         </div>
       </div>
