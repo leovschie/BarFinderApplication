@@ -20,7 +20,7 @@ class Results extends Component {
             break;
 
           case "barAddress":
-            barAddress = barResults[key];
+            barAddress = barResults[key].toLowerCase();
             break;
 
           case "barPrice":
@@ -32,18 +32,15 @@ class Results extends Component {
         }
       }
     }
-    console.log("the bar", barName);
-    console.log("the url", barUrl);
-    console.log("the img", barImg);
-    console.log("address", barAddress);
-    console.log("the pricerange", barPrice);
 
     if (barResults) {
       return (
         <div className="centerText">
-          <h1>see you at {barName}</h1>
+          <h1>
+            see you at <span className="barName">{barName}</span>
+          </h1>
           <img className="barImg" src={barImg} alt="Bar" />
-          <p>{barAddress}</p>
+          <p>{barAddress} amsterdam</p>
           <p>{barPrice}</p>
           <a href={barUrl} target="_blank" rel="noopener noreferrer">
             read more

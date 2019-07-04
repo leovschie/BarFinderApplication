@@ -1,5 +1,5 @@
-//this form has its own state because when you make a new user you need to save it somehwere. So we're saving it in the state.
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class RegisterForm extends Component {
@@ -22,12 +22,9 @@ class RegisterForm extends Component {
       password: this.state.password
     };
 
-    //this sends user to server in the backend
     axios
       .post("/register", user)
       .then(results => {
-        //addUser that is passed down from App.js (react) for updating the state of app.js. So it is a prop in form that we get from
-        // somewhere that holds addUser. In this addUser we are putting (this.state)
         this.props.addUser(this.state);
         this.setState({
           id: results.data.id,
@@ -37,41 +34,43 @@ class RegisterForm extends Component {
         });
       })
       .catch();
+    window.location.reload();
   };
 
   render() {
-    return (
-      <div className="centerText">
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            {/* <label>Email:</label> */}
+    if (this.state.redirect) return <Redirect to="/" />;
+    else
+      return (
+        <div className="centerText">
+          <h1>sign up</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <br />
+              <input
+                type="email"
+                placeholder="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div>
+              <br />
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
             <br />
-            <input
-              type="email"
-              placeholder="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div>
-            <br />
-            <input
-              type="password"
-              placeholder="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <br />
-          <input type="submit" value="create" />
-        </form>
-      </div>
-    );
+            <input type="submit" value="create" />
+          </form>
+        </div>
+      );
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import logo from "../images/logo2.png";
+import logo from "../images/borrle.gif";
 import next from "../images/right-arrow.png";
 import previous from "../images/left-arrow.png";
 
@@ -33,7 +33,6 @@ class ApiForm extends Component {
       venueType: this.state.venueType,
       priceRange: this.state.priceRange
     };
-    console.log(formData);
 
     axios
       .post("/api/formdata", formData)
@@ -111,12 +110,11 @@ class ApiForm extends Component {
     else
       return (
         <div className="centerText">
-          <h1>borrle.</h1>
-          <img alt="borrle logo" className="logoImg" src={logo} />
+          <div className="headerHome">
+            <img alt="borrle logo" className="logoImg" src={logo} />
+            <h2>your night out starts here..</h2>
+          </div>
           <form onSubmit={this.handleSubmit}>
-            {/* 
-          render the form steps and pass required props in
-        */}
             <Step1
               currentStep={this.state.currentStep}
               handleChange={this.handleChange}
@@ -180,7 +178,7 @@ function Step2(props) {
   return (
     <div className="selectdiv">
       <label htmlFor="venueType"> </label>
-      <p>belly mood?</p>
+      <h3>belly mood?</h3>
       <select
         className="form-control"
         value={props.venueType}
@@ -199,10 +197,12 @@ function Step3(props) {
     return null;
   }
   return (
-    <React.Fragment>
+    <div className="form">
       <div className="form-group">
         <div className="custom-select">
-          <label htmlFor="priceRange">price range</label>
+          <label htmlFor="priceRange">
+            <h3>wallet mood</h3>
+          </label>
           <select
             className="form-control"
             id="priceRange"
@@ -217,8 +217,8 @@ function Step3(props) {
           </select>
         </div>
       </div>
-      <button className="btn btn-success btn-block">meet up</button>
-    </React.Fragment>
+      <button className="btn btn-success btn-block">are you ready?</button>
+    </div>
   );
 }
 

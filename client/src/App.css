@@ -6,10 +6,11 @@ body > #root > div {
 .App {
   font-family: "Fira Sans", sans-serif;
   font-weight: bold;
-  background: #101b33;
+  background: #00ab7f;
   width: auto;
   color: white;
   letter-spacing: 0.15em;
+  border: 2px solid white;
 }
 
 a {
@@ -21,23 +22,43 @@ a:hover {
   color: #e86262;
   cursor: pointer;
 }
+
+ul {
+  list-style-type: none;
+}
+
 .centerText {
   text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.logOutButton {
+  margin-top: 5%;
+}
+
+.logOutButton:hover {
+  color: #f0d2d1;
+  cursor: pointer;
 }
 
 select {
   color: white;
   font-family: "Fira Sans", sans-serif;
   outline: none;
+  margin-bottom: 1%;
 }
 
 input {
   border: none;
   background: transparent;
   font-family: "Fira Sans", sans-serif;
+  letter-spacing: 0.15em;
   font-weight: bold;
-  font-size: 4vh;
-  color: #e86262;
+  font-size: 3vh;
+  color: #0b3948;
   text-align: center;
   padding-bottom: 1%;
   outline: none;
@@ -45,8 +66,10 @@ input {
 button {
   border: none;
   background-color: transparent;
-  color: #82caff;
-  font-size: 2vh;
+  font-family: "Fira Sans", sans-serif;
+  letter-spacing: 0.15em;
+  color: white;
+  font-size: 2em;
   cursor: pointer;
   outline: none;
 }
@@ -73,19 +96,35 @@ h1 {
   font-weight: bold;
   justify-self: center;
   font-size: 8vh;
-  color: #82caff;
+  color: white;
   padding: 1%;
 }
+
+h2 {
+  color: #0b3948;
+  /* text-decoration: underline; */
+}
+
 .barImg {
+  min-width: 350px;
   width: 30%;
   height: auto;
 }
 
+.barName {
+  color: #0b3948;
+}
+
 .logoImg {
-  width: 20%;
+  min-width: 200px;
+  width: 30%;
   height: auto;
-  filter: invert(100%);
-  padding-bottom: 4%;
+  /* border-bottom: 2px solid white; */
+  /* filter: invert(100%); */
+}
+
+.headerHome {
+  margin-bottom: 10%;
 }
 
 .arrow {
@@ -99,69 +138,6 @@ h1 {
   color: #dcfaff;
 }
 
-/* styling for selectboxes!*/
-/* body {
-  background: transparent;
-}
-
-.selectdiv {
-  position: relative;
-
-
-  float: left;
-  min-width: 200px;
-  margin: 50px 33%;
-}
-
-
-select::-ms-expand {
-  display: none;
-}
-
-.selectdiv:after {
-  content: "<>";
-  font: 17px "Consolas", monospace;
-  color: #333;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-  right: 11px;
-
-
-  top: 18px;
-  padding: 0 0 2px;
-  border-bottom: 1px solid #999;
-  
-
-  position: absolute;
-  pointer-events: none;
-}
-
-.selectdiv select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  height: 50px;
-  float: right;
-  margin: 5px 0px;
-  padding: 0px 24px;
-  font-size: 16px;
-  line-height: 1.75;
-  color: black;
-  font-family: "Fira Sans", sans-serif;
-  background-color: #ffffff;
-  background-image: none;
-  border: 1px solid #cccccc;
-  -ms-word-break: normal;
-  word-break: normal;
-} */
-
 html,
 body {
   margin: 0;
@@ -169,14 +145,10 @@ body {
 
 #App {
   font-family: "Fira Sans", sans-serif;
-
-  /* Give app full page to work with */
 }
 
 #page-wrap {
   text-align: center;
-
-  /* Prevent sidebar from showing a scrollbar on page */
   overflow: auto;
 }
 
@@ -187,7 +159,7 @@ body {
   /* Our sidebar item styling */
   text-decoration: none;
   margin-bottom: 10px;
-  color: #dcfaff;
+  color: white;
   transition: color 0.2s;
 }
 
@@ -220,27 +192,37 @@ body {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #dcfaff;
+  background: white;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: #e86262;
+  background: #0b3948;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #e86262;
+  fill: #0b3948;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #2ca18c;
+  color: white;
 }
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+  h1 {
+    padding-top: 8%;
+  }
+  .logoImg {
+    padding-top: 0;
+    margin-top: 0;
+  }
 }

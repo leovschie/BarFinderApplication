@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import UserHistory from "./UserHistory";
 
 class LogOutButton extends Component {
   constructor(props) {
@@ -16,17 +15,14 @@ class LogOutButton extends Component {
     axios
       .get("/logout")
       .then(results => {
-        if (results === true) {
-          this.setState({
-            redirect: true
-          });
-        } else {
-          console.log(`Something is not working babe`);
-        }
+        console.log(`user successfully logged out: ${results}`);
       })
       .catch(error => {
         console.error(`error logging out: ${error.stack}`);
+        window.location.reload();
       });
+
+    this.setState({ redirect: true });
   };
 
   render() {
@@ -34,10 +30,13 @@ class LogOutButton extends Component {
     else
       return (
         <div className="centerText">
-          <form className="logOutButton" onSubmit={this.logOut.bind(this)}>
-            <input type="submit" value="log out" />
+          <form onSubmit={this.logOut.bind(this)}>
+            <input
+              className="logOutButton"
+              type="submit"
+              value="click here to log out"
+            />
           </form>
-          <UserHistory />
         </div>
       );
   }

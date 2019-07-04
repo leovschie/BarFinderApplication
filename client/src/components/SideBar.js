@@ -46,7 +46,7 @@ class SideBar extends Component {
             home
           </Link>
           <Link to="/resulthistory" className="menu-item">
-            your barhopping history
+            past adventures
           </Link>
           <Link to="/Map" className="menu-item">
             map

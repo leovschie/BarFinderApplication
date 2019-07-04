@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import ResultItem from "./ResultItem";
 import axios from "axios";
 
 class UserHistory extends Component {
@@ -17,16 +16,7 @@ class UserHistory extends Component {
             address: result.address
           };
         });
-        this.state.results.push(resultshistory);
-
-        console.log(
-          "-------this is the array of filtered results",
-          resultshistory
-        );
-        console.log(
-          "++++++and this is your state.results now",
-          this.state.results
-        );
+        this.setState({ results: resultshistory });
       })
       .catch(error =>
         console.error(
@@ -39,21 +29,16 @@ class UserHistory extends Component {
   }
 
   render() {
+    const barNames = this.state.results.map((bar, index) => (
+      <ul key={index}>
+        <li className="barName">{bar.barname.toLowerCase()}</li>
+        <li>{bar.address.toLowerCase()}</li>
+      </ul>
+    ));
     return (
       <div className="centerText">
-        <h1>this is your barhopping history</h1>
-        <ul>
-          <p>
-            {this.state.results.forEach(result => {
-              return result.barname;
-            })}
-          </p>
-        </ul>
-
-        {/* {this.state.results.map(result => (
-            <ResultItem key={result.id} result={result} />
-          ))}
-           */}
+        <h1>your past adventures took place here..</h1>
+        {barNames}
       </div>
     );
   }

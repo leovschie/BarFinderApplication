@@ -76,7 +76,7 @@ class LoginForm extends Component {
               />
             </div>
             <br />
-            <input type="submit" value="log In" />
+            <input type="submit" value="log in" />
           </form>
         </div>
       );
