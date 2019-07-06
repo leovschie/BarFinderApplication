@@ -112,7 +112,7 @@ class ApiForm extends Component {
         <div className="centerText">
           <div className="headerHome">
             <img alt="borrle logo" className="logoImg" src={logo} />
-            <h2>your night out starts here..</h2>
+            <h2 className="fit">your night out starts here..</h2>
           </div>
           <form onSubmit={this.handleSubmit}>
             <Step1
@@ -201,7 +201,7 @@ function Step3(props) {
       <div className="form-group">
         <div className="custom-select">
           <label htmlFor="priceRange">
-            <h3>wallet mood</h3>
+            <h3>wallet mood?</h3>
           </label>
           <select
             className="form-control"
@@ -217,7 +217,7 @@ function Step3(props) {
           </select>
         </div>
       </div>
-      <button className="btn btn-success btn-block">are you ready?</button>
+      <button className="btn btn-success btn-block">let's go!</button>
     </div>
   );
 }

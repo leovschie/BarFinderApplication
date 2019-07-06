@@ -1,16 +1,28 @@
+@font-face {
+  font-family: "Circular";
+  src: url("./fonts/Circular/Circular-Medium.eot");
+  src: url("./fonts/Circular/Circular-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("./fonts/Circular/Circular-Medium.woff2") format("woff2"),
+    url("./fonts/Circular/Circular-Medium.woff") format("woff"),
+    url("./fonts/Circular/Circular-Medium.svg#Circular-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+}
+
 body > #root > div {
   height: 100vh;
   position: fixed;
   width: 100vw;
 }
 .App {
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Circular", sans-serif;
   font-weight: bold;
   background: #00ab7f;
   width: auto;
   color: white;
   letter-spacing: 0.15em;
-  border: 2px solid white;
+  font-size: 3vh;
 }
 
 a {
@@ -19,7 +31,7 @@ a {
 }
 
 a:hover {
-  color: #e86262;
+  color: #0b3948;
   cursor: pointer;
 }
 
@@ -54,28 +66,31 @@ select {
 input {
   border: none;
   background: transparent;
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Circular", sans-serif;
   letter-spacing: 0.15em;
   font-weight: bold;
-  font-size: 3vh;
+  font-size: 3.5vh;
   color: #0b3948;
   text-align: center;
   padding-bottom: 1%;
   outline: none;
+  font-size: 2em;
 }
+
 button {
   border: none;
   background-color: transparent;
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Circular", sans-serif;
+  font-weight: bold;
   letter-spacing: 0.15em;
   color: white;
-  font-size: 2em;
+  font-size: 1.5em;
   cursor: pointer;
   outline: none;
 }
 
 button:hover {
-  color: #e86262;
+  color: #0b3948;
 }
 ::placeholder {
   color: white;
@@ -105,6 +120,16 @@ h2 {
   /* text-decoration: underline; */
 }
 
+h2.fit {
+  font-size: 1.1em;
+  color: white;
+  letter-spacing: 0.15em;
+}
+
+h3 {
+  font-size: 2em;
+}
+
 .barImg {
   min-width: 350px;
   width: 30%;
@@ -117,10 +142,17 @@ h2 {
 
 .logoImg {
   min-width: 200px;
-  width: 30%;
+  width: 32%;
   height: auto;
   /* border-bottom: 2px solid white; */
   /* filter: invert(100%); */
+}
+
+.SmallLogoImg {
+  min-width: 100px;
+  width: 9%;
+  height: auto;
+  /* float: right; */
 }
 
 .headerHome {
@@ -129,9 +161,16 @@ h2 {
 
 .arrow {
   filter: invert(100%);
-  width: 20%;
+  width: 15%;
   height: auto;
   padding-top: 3%;
+}
+
+.centerTextScroll {
+  max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-align: center;
 }
 
 ::selection {
@@ -143,10 +182,6 @@ body {
   margin: 0;
 }
 
-#App {
-  font-family: "Fira Sans", sans-serif;
-}
-
 #page-wrap {
   text-align: center;
   overflow: auto;
@@ -155,17 +190,17 @@ body {
 /* Individual item */
 .bm-item {
   display: inline-block;
-
-  /* Our sidebar item styling */
   text-decoration: none;
-  margin-bottom: 10px;
-  color: white;
+  font-size: 1.5em;
+  outline: none;
+  color: #00ab7f;
   transition: color 0.2s;
+  font-family: "Circular", sans-serif;
 }
 
 /* Change color on hover */
 .bm-item:hover {
-  color: #dcfaff;
+  color: #0b3948;
 }
 
 /* The rest copied directly from react-burger-menu docs */
@@ -181,7 +216,7 @@ body {
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: white;
+  background: #0b3948;
 }
 
 /* Position and sizing of clickable cross button */
@@ -192,19 +227,19 @@ body {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: white;
+  background: #0b3948;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: #0b3948;
+  background: white;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #0b3948;
+  fill: white;
 }
 
 /* Wrapper for item list */
@@ -219,7 +254,7 @@ body {
 
 @media (max-width: 600px) {
   h1 {
-    padding-top: 8%;
+    padding-top: 3%;
   }
   .logoImg {
     padding-top: 0;

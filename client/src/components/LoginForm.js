@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import logo from "../images/borrle.gif";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class LoginForm extends Component {
     else
       return (
         <div className="centerText">
+          <img alt="borrle logo" className="SmallLogoImg" src={logo} />
           <h1>log in</h1>
           <form onSubmit={this.handleSubmit}>
             <div>

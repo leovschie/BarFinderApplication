@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import logo from "../images/borrle.gif";
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class RegisterForm extends Component {
     else
       return (
         <div className="centerText">
+          <img alt="borrle logo" className="SmallLogoImg" src={logo} />
           <h1>sign up</h1>
           <form onSubmit={this.handleSubmit}>
             <div>
@@ -52,6 +54,7 @@ class RegisterForm extends Component {
                 name="email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                autocomplete="off"
                 required
               />
             </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import logo from "../images/borrle.gif";
 
 class UserHistory extends Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class UserHistory extends Component {
       </ul>
     ));
     return (
-      <div className="centerText">
+      <div className="centerTextScroll">
+        <img alt="borrle logo" className="SmallLogoImg" src={logo} />
         <h1>your past adventures took place here..</h1>
         {barNames}
       </div>
