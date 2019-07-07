@@ -49,6 +49,7 @@ class RegisterForm extends Component {
             <div>
               <br />
               <input
+                className="inputCentered"
                 type="email"
                 placeholder="email"
                 name="email"
@@ -61,6 +62,7 @@ class RegisterForm extends Component {
             <div>
               <br />
               <input
+                className="inputCentered"
                 type="password"
                 placeholder="password"
                 name="password"
@@ -70,7 +72,7 @@ class RegisterForm extends Component {
               />
             </div>
             <br />
-            <input type="submit" value="create" />
+            <input className="submit" type="submit" value="create" />
           </form>
         </div>
       );

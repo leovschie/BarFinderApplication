@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import logo from "../images/borrle.gif";
-import next from "../images/right-arrow.png";
-import previous from "../images/left-arrow.png";
 
 class ApiForm extends Component {
   constructor(props) {
@@ -59,7 +57,7 @@ class ApiForm extends Component {
 
   _next = () => {
     let currentStep = this.state.currentStep;
-    currentStep = currentStep >= 2 ? 3 : currentStep + 1;
+    currentStep = currentStep >= 3 ? 4 : currentStep + 1;
     this.setState({
       currentStep: currentStep
     });
@@ -77,12 +75,8 @@ class ApiForm extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <button
-          className="btn btn-secondary"
-          type="button"
-          onClick={this._prev}
-        >
-          <img alt="arrow" className="arrow" src={previous} />
+        <button className="buttonLeft" type="button" onClick={this._prev}>
+          back
         </button>
       );
     }
@@ -91,14 +85,10 @@ class ApiForm extends Component {
 
   nextButton() {
     let currentStep = this.state.currentStep;
-    if (currentStep < 3) {
+    if (currentStep < 4) {
       return (
-        <button
-          className="btn btn-primary float-right"
-          type="button"
-          onClick={this._next}
-        >
-          <img alt="arrow" className="arrow" src={next} />
+        <button className="buttonRight" type="button" onClick={this._next}>
+          next
         </button>
       );
     }
@@ -109,31 +99,38 @@ class ApiForm extends Component {
     if (this.state.redirect) return <Redirect to="/results" />;
     else
       return (
-        <div className="centerText">
-          <div className="headerHome">
-            <img alt="borrle logo" className="logoImg" src={logo} />
-            <h2 className="fit">your night out starts here..</h2>
+        <div className="apiForm">
+          <div className="centerText">
+            <div className="headerHome">
+              <img alt="borrle logo" className="logoImg" src={logo} />
+              <h2 className="fit">your night out starts here..</h2>
+            </div>
+            <form onSubmit={this.handleSubmit}>
+              <Step1
+                currentStep={this.state.currentStep}
+                handleChange={this.handleCange}
+              />
+              <Step2
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                addressOne={this.state.addressOne}
+                addressTwo={this.state.addressTwo}
+              />
+              <Step3
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                venueType={this.state.venueType}
+              />
+              <Step4
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                priceRange={this.state.priceRange}
+              />
+
+              {this.previousButton()}
+              {this.nextButton()}
+            </form>
           </div>
-          <form onSubmit={this.handleSubmit}>
-            <Step1
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              addressOne={this.state.addressOne}
-              addressTwo={this.state.addressTwo}
-            />
-            <Step2
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              venueType={this.state.venueType}
-            />
-            <Step3
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              priceRange={this.state.priceRange}
-            />
-            {this.previousButton()}
-            {this.nextButton()}
-          </form>
         </div>
       );
   }
@@ -143,32 +140,7 @@ function Step1(props) {
   if (props.currentStep !== 1) {
     return null;
   }
-  return (
-    <div className="form-group">
-      <label htmlFor="addressOne" />
-      <input
-        className="form-control"
-        id="addressOne"
-        name="addressOne"
-        type="text"
-        placeholder="where u at?"
-        autoComplete="off"
-        value={props.addressOne}
-        onChange={props.handleChange}
-      />
-      <label htmlFor="addressTwo" />
-      <input
-        className="form-control"
-        id="addressTwo"
-        name="addressTwo"
-        type="text"
-        automplete="off"
-        placeholder="and ur friend?"
-        value={props.addressTwo}
-        onChange={props.handleChange}
-      />
-    </div>
-  );
+  return null;
 }
 
 function Step2(props) {
@@ -176,18 +148,38 @@ function Step2(props) {
     return null;
   }
   return (
-    <div className="selectdiv">
-      <label htmlFor="venueType"> </label>
-      <h3>belly mood?</h3>
-      <select
-        className="form-control"
-        value={props.venueType}
-        onChange={props.handleChange}
-        name="venueType"
-      >
-        <option value="bars">drinks</option>
-        <option value="restaurants">food and drinks</option>
-      </select>
+    <div className="form-group">
+      <div className="textForm">
+        <h3>
+          do you feel like going out tonight but don’t know where to go? no
+          worries, we've got you covered. we'll set you up with the perfect bar
+          or restaurant in the perfect location. for starters, fill us in on
+          your location:
+          <span htmlFor="addressOne" />
+          <input
+            className="form-control"
+            id="addressOne"
+            name="addressOne"
+            type="text"
+            placeholder="                            "
+            autoComplete="off"
+            value={props.addressOne}
+            onChange={props.handleChange}
+          />
+          . now, enter your friend's address: <span htmlFor="addressTwo" />
+          <input
+            className="form-control"
+            id="addressTwo"
+            name="addressTwo"
+            type="text"
+            automplete="off"
+            placeholder="                            "
+            value={props.addressTwo}
+            onChange={props.handleChange}
+          />
+          . click next to customize your plans a bit more.
+        </h3>
+      </div>
     </div>
   );
 }
@@ -197,27 +189,55 @@ function Step3(props) {
     return null;
   }
   return (
+    <div className="selectdiv">
+      <label htmlFor="venueType"> </label>
+      <div className="textForm">
+        <h3>
+          okay, next question: are you in for just drinks, or feeling a little
+          hungry as well?
+        </h3>
+        <select
+          className="form-control"
+          value={props.venueType}
+          onChange={props.handleChange}
+          name="venueType"
+        >
+          <option value="bars">just drinks</option>
+          <option value="restaurants">i'm hungry!</option>
+        </select>
+      </div>
+    </div>
+  );
+}
+
+function Step4(props) {
+  if (props.currentStep !== 4) {
+    return null;
+  }
+  return (
     <div className="form">
       <div className="form-group">
         <div className="custom-select">
-          <label htmlFor="priceRange">
-            <h3>wallet mood?</h3>
-          </label>
-          <select
-            className="form-control"
-            id="priceRange"
-            name="priceRange"
-            placeholder="money mood?"
-            value={props.priceRange}
-            onChange={props.handleChange}
-          >
-            <option value="1">cheap</option>
-            <option value="2">medium</option>
-            <option value="3">fancy</option>
-          </select>
+          <label htmlFor="priceRange" />
+          <div className="textForm">
+            <h3>one last thing: how are you feeling budget-wise?</h3>
+
+            <select
+              className="form-control"
+              id="priceRange"
+              name="priceRange"
+              placeholder="money mood?"
+              value={props.priceRange}
+              onChange={props.handleChange}
+            >
+              <option value="1">tight</option>
+              <option value="2">i'm okay</option>
+              <option value="3">feeling fancy</option>
+            </select>
+          </div>
         </div>
       </div>
-      <button className="btn btn-success btn-block">let's go!</button>
+      <button className="submitButton">let's go!</button>
     </div>
   );
 }

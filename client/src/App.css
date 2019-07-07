@@ -25,13 +25,18 @@ body > #root > div {
   font-size: 3vh;
 }
 
+.apiForm {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 a {
   text-decoration: none;
-  color: white;
+  color: #0b3948;
 }
 
 a:hover {
-  color: #0b3948;
+  color: white;
   cursor: pointer;
 }
 
@@ -43,22 +48,10 @@ ul {
   text-align: center;
 }
 
-button:hover {
-  cursor: pointer;
-}
-
-.logOutButton {
-  margin-top: 5%;
-}
-
-.logOutButton:hover {
-  color: #f0d2d1;
-  cursor: pointer;
-}
-
 select {
-  color: white;
-  font-family: "Fira Sans", sans-serif;
+  color: #0b3948;
+  font-weight: bold;
+  font-family: "Circular", sans-serif;
   outline: none;
   margin-bottom: 1%;
 }
@@ -69,12 +62,39 @@ input {
   font-family: "Circular", sans-serif;
   letter-spacing: 0.15em;
   font-weight: bold;
-  font-size: 3.5vh;
+  font-size: 1em;
   color: #0b3948;
-  text-align: center;
-  padding-bottom: 1%;
+
+  /* text-align: center; */
+  /* width: 90%; */
+  /* padding-bottom: 1%; */
   outline: none;
-  font-size: 2em;
+}
+
+input.form-control {
+  text-decoration: underline;
+}
+
+.form-control::-webkit-input-placeholder {
+  text-decoration: underline;
+}
+
+.inputCentered {
+  text-align: center;
+}
+
+.submit {
+  cursor: pointer;
+}
+.submit:hover {
+  color: white;
+}
+
+.textForm {
+  width: 33%;
+  font-size: 0.9em;
+  text-align: justify;
+  margin: 0 auto;
 }
 
 button {
@@ -83,23 +103,47 @@ button {
   font-family: "Circular", sans-serif;
   font-weight: bold;
   letter-spacing: 0.15em;
-  color: white;
+  color: #0b3948;
   font-size: 1.5em;
   cursor: pointer;
   outline: none;
 }
-
 button:hover {
-  color: #0b3948;
-}
-::placeholder {
+  cursor: pointer;
   color: white;
+}
+
+.buttonRight {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 4%;
+}
+.buttonLeft {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 4%;
+}
+
+.submitButton {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 4%;
+}
+
+::placeholder {
+  color: #0b3948;
+  font-size: 1em;
+  font-family: "Circular", sans-serif;
 }
 
 select {
   background-color: transparent;
   border: 0;
-  font-size: 2vh;
+  font-size: 0.9em;
+  letter-spacing: 0.15em;
 }
 
 .customselect {
@@ -121,19 +165,25 @@ h2 {
 }
 
 h2.fit {
-  font-size: 1.1em;
+  font-size: 1.25em;
   color: white;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
+  margin-bottom: 0;
 }
 
 h3 {
-  font-size: 2em;
+  font-size: 1em;
+  margin: 1%;
+  color: white;
+  font-weight: normal;
+  letter-spacing: 0.1em;
 }
 
 .barImg {
   min-width: 350px;
   width: 30%;
   height: auto;
+  /* border: 15px solid #0b3948; */
 }
 
 .barName {
@@ -142,10 +192,8 @@ h3 {
 
 .logoImg {
   min-width: 200px;
-  width: 32%;
+  width: 33%;
   height: auto;
-  /* border-bottom: 2px solid white; */
-  /* filter: invert(100%); */
 }
 
 .SmallLogoImg {
@@ -156,7 +204,7 @@ h3 {
 }
 
 .headerHome {
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 }
 
 .arrow {
@@ -255,9 +303,14 @@ body {
 @media (max-width: 600px) {
   h1 {
     padding-top: 3%;
+    font-size: 5vh;
   }
+
   .logoImg {
     padding-top: 0;
     margin-top: 0;
+  }
+  .textForm {
+    width: 90%;
   }
 }

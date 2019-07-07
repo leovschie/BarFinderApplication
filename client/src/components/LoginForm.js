@@ -57,6 +57,7 @@ class LoginForm extends Component {
             <div>
               <br />
               <input
+                className="inputCentered"
                 type="email"
                 placeholder="email"
                 name="email"
@@ -69,6 +70,7 @@ class LoginForm extends Component {
             <div>
               <br />
               <input
+                className="inputCentered"
                 type="password"
                 placeholder="password"
                 name="password"
@@ -78,7 +80,7 @@ class LoginForm extends Component {
               />
             </div>
             <br />
-            <input type="submit" value="log in" />
+            <input className="submit" type="submit" value="log in" />
           </form>
         </div>
       );

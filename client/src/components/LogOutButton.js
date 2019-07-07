@@ -34,7 +34,7 @@ class LogOutButton extends Component {
           <img alt="borrle logo" className="SmallLogoImg" src={logo} />
           <form onSubmit={this.logOut.bind(this)}>
             <input
-              className="logOutButton"
+              className="submit"
               type="submit"
               value="click here to log out"
             />
