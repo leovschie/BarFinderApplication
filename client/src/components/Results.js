@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import logo from "../images/borrle.gif";
+import { Link } from "react-router-dom";
 
 class Results extends Component {
   render() {
@@ -36,6 +38,9 @@ class Results extends Component {
     if (barResults) {
       return (
         <div className="centerText">
+          <Link to="/" className="menu-item">
+            <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+          </Link>
           <h1>
             see you at <span className="barName">{barName}</span>
           </h1>

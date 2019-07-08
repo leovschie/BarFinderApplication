@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import logo from "../images/borrle.gif";
+import { Link } from "react-router-dom";
 
 class LogOutButton extends Component {
   constructor(props) {
@@ -31,7 +32,9 @@ class LogOutButton extends Component {
     else
       return (
         <div className="centerText">
-          <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+          <Link to="/" className="menu-item">
+            <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+          </Link>
           <form onSubmit={this.logOut.bind(this)}>
             <input
               className="submit"

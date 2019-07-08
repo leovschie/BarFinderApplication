@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import logo from "../images/borrle.gif";
+import { Link } from "react-router-dom";
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -43,7 +44,9 @@ class RegisterForm extends Component {
     else
       return (
         <div className="centerText">
-          <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+          <Link to="/" className="menu-item">
+            <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+          </Link>
           <h1>sign up</h1>
           <form onSubmit={this.handleSubmit}>
             <div>
@@ -72,7 +75,7 @@ class RegisterForm extends Component {
               />
             </div>
             <br />
-            <input className="submit" type="submit" value="create" />
+            <input className="submit" type="submit" value="sign up" />
           </form>
         </div>
       );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import logo from "../images/borrle.gif";
+import { Link } from "react-router-dom";
 
 class UserHistory extends Component {
   constructor(props) {
@@ -38,7 +39,9 @@ class UserHistory extends Component {
     ));
     return (
       <div className="centerTextScroll">
-        <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+        <Link to="/" className="menu-item">
+          <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+        </Link>
         <h1>your past adventures took place here..</h1>
         {barNames}
       </div>

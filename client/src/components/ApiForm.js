@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import logo from "../images/borrle.gif";
+import { Link } from "react-router-dom";
 
 class ApiForm extends Component {
   constructor(props) {
@@ -102,7 +103,9 @@ class ApiForm extends Component {
         <div className="apiForm">
           <div className="centerText">
             <div className="headerHome">
-              <img alt="borrle logo" className="logoImg" src={logo} />
+              <Link to="/" className="menu-item">
+                <img alt="borrle logo" className="logoImg" src={logo} />
+              </Link>
               <h2 className="fit">your night out starts here..</h2>
             </div>
             <form onSubmit={this.handleSubmit}>
@@ -151,10 +154,10 @@ function Step2(props) {
     <div className="form-group">
       <div className="textForm">
         <h3>
-          do you feel like going out tonight but don’t know where to go? no
-          worries, we've got you covered. we'll set you up with the perfect bar
-          or restaurant in the perfect location. for starters, fill us in on
-          your location:
+          feel like going out tonight but don’t know where to go? no worries,
+          we've got you covered. we'll set you up with the perfect bar or
+          restaurant in the most convenient location. for starters, fill us in
+          on your location:
           <span htmlFor="addressOne" />
           <input
             className="form-control"
@@ -177,7 +180,7 @@ function Step2(props) {
             value={props.addressTwo}
             onChange={props.handleChange}
           />
-          . click next to customize your plans a bit more.
+          . click next to tell us a bit more about your plans!
         </h3>
       </div>
     </div>
@@ -231,7 +234,7 @@ function Step4(props) {
               onChange={props.handleChange}
             >
               <option value="1">tight</option>
-              <option value="2">i'm okay</option>
+              <option value="2">steady</option>
               <option value="3">feeling fancy</option>
             </select>
           </div>
