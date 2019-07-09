@@ -1,4 +1,4 @@
-# BarFinderApplication
+# Borrle.
 
 An application that helps its users to find the highest rated bar or restaurant in the midpoint between their locations.
 
