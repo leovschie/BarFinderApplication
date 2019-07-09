@@ -7,7 +7,7 @@ import SideBar from "./components/SideBar";
 import ApiForm from "./components/ApiForm";
 import RegisterForm from "./components/RegisterForm";
 import LogOutButton from "./components/LogOutButton";
-import RenderMap from "./components/RenderMap";
+
 import UserHistory from "./components/UserHistory";
 
 class App extends Component {
@@ -43,7 +43,6 @@ class App extends Component {
             render={routeProps => <RegisterForm addUser={this.addUser} />}
           />
           <Route path="/Logout" component={LogOutButton} />
-          <Route path="/Map" component={RenderMap} />
           <Route
             path="/Results"
             render={routeProps => (

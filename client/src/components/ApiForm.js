@@ -13,7 +13,8 @@ class ApiForm extends Component {
       addressTwo: "",
       venueType: "bars",
       priceRange: 2,
-      redirect: false
+      redirect: false,
+      loggedIn: false
     };
   }
 
@@ -55,6 +56,19 @@ class ApiForm extends Component {
       redirect: true
     });
   };
+
+  componentDidMount() {
+    axios
+      .get("/home")
+      .then(results => {
+        this.setState({ loggedIn: results.data });
+      })
+      .catch(error => {
+        console.error(
+          `something went wrong with conditional rendering ${error.stack}`
+        );
+      });
+  }
 
   _next = () => {
     let currentStep = this.state.currentStep;
@@ -98,7 +112,7 @@ class ApiForm extends Component {
 
   render() {
     if (this.state.redirect) return <Redirect to="/results" />;
-    else
+    else if (this.state.loggedIn) {
       return (
         <div className="apiForm">
           <div className="centerText">
@@ -106,7 +120,11 @@ class ApiForm extends Component {
               <Link to="/" className="menu-item">
                 <img alt="borrle logo" className="logoImg" src={logo} />
               </Link>
-              <h2 className="fit">your night out starts here..</h2>
+              <h2 className="fit">
+                welcome back <span className="blue">{this.state.loggedIn}</span>
+                <br />
+                your night out starts here
+              </h2>
             </div>
             <form onSubmit={this.handleSubmit}>
               <Step1
@@ -136,6 +154,45 @@ class ApiForm extends Component {
           </div>
         </div>
       );
+    } else {
+      return (
+        <div className="apiForm">
+          <div className="centerText">
+            <div className="headerHome">
+              <Link to="/" className="menu-item">
+                <img alt="borrle logo" className="logoImg" src={logo} />
+              </Link>
+              <h2 className="fit">your night out starts here</h2>
+            </div>
+            <form onSubmit={this.handleSubmit}>
+              <Step1
+                currentStep={this.state.currentStep}
+                handleChange={this.handleCange}
+              />
+              <Step2
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                addressOne={this.state.addressOne}
+                addressTwo={this.state.addressTwo}
+              />
+              <Step3
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                venueType={this.state.venueType}
+              />
+              <Step4
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                priceRange={this.state.priceRange}
+              />
+
+              {this.previousButton()}
+              {this.nextButton()}
+            </form>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
@@ -240,7 +297,7 @@ function Step4(props) {
           </div>
         </div>
       </div>
-      <button className="submitButton">let's go!</button>
+      <button className="submitButton">let's go</button>
     </div>
   );
 }

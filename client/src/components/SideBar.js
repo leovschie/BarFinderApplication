@@ -16,7 +16,9 @@ class SideBar extends Component {
       .get("/home")
       .then(results => {
         this.setState({ loggedIn: results.data });
+        console.log(`THESE ARE THE RESULTS.DATA ${results.data}`);
       })
+
       .catch(error => {
         console.error(
           `something went wrong with conditional rendering ${error.stack}`
@@ -46,10 +48,8 @@ class SideBar extends Component {
             home
           </Link>
           <Link to="/resulthistory" className="menu-item">
-            past adventures
-          </Link>
-          <Link to="/Map" className="menu-item">
-            map
+            past
+            <br /> adventures
           </Link>
           <Link to="/Logout" className="menu-item">
             log out

@@ -38,18 +38,20 @@ class Results extends Component {
     if (barResults) {
       return (
         <div className="centerText">
-          <Link to="/" className="menu-item">
-            <img alt="borrle logo" className="SmallLogoImg" src={logo} />
-          </Link>
-          <h1>
-            see you at <span className="barName">{barName}</span>
-          </h1>
-          <img className="barImg" src={barImg} alt="Bar" />
-          <p>{barAddress} amsterdam</p>
-          <p>{barPrice}</p>
-          <a href={barUrl} target="_blank" rel="noopener noreferrer">
-            read more
-          </a>
+          <div className="centerTextScroll">
+            <Link to="/" className="menu-item">
+              <img alt="borrle logo" className="SmallLogoImg" src={logo} />
+            </Link>
+            <h1>
+              see you at <span className="barName">{barName}</span>
+            </h1>
+            <img className="barImg" src={barImg} alt="Bar" />
+            <p>{barAddress} amsterdam</p>
+            <p>{barPrice}</p>
+            <a href={barUrl} target="_blank" rel="noopener noreferrer">
+              read more
+            </a>
+          </div>
         </div>
       );
     } else return null;
